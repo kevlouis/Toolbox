@@ -11,9 +11,7 @@ Projet d'études de M1 : Toolbox automatiser
 
 # Schéma d'architecture 
 
-
-![image](https://github.com/kevlouis/Toolbox/assets/114162535/b18794ec-28bc-458f-bfed-03ca33970b8e)
-
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/c29ec000-15b5-434f-b100-4961dc6f10c2)
 
 ## Fonctionnalités
 
