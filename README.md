@@ -73,7 +73,6 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 ## Scripts
 ### create_shortcut.py
 python
-Copier le code
 import os
 import platform
 import subprocess
