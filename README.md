@@ -9,6 +9,61 @@ Projet d'études de M1 : Toolbox automatiser
 
 ![image](https://github.com/kevlouis/Toolbox/assets/114162535/47fb1295-5178-4b43-84c9-22259d0fa395)
 
+# Schéma d'architecture 
+
++--------------------------+
+|    Interface Graphique   |
+|          (Tkinter)       |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|   Script principal       |
+| python_intrusion_toolbox |
++--------------------------+
+| - Exploration des ports  |
+| - Détection des vulns    |
+| - etc.                   |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+| Bibliothèques et Outils  |
+| - Nmap                   |
+| - Paramiko               |
+| - Pexpect                |
+| - ReportLab              |
+| - Matplotlib             |
+| - PyInstaller            |
++--------------------------+
+            |
+            v
++-----------+--------------+
+|  Rapports PDF            |
++--------------------------+
+| - Générés et stockés     |
+|   dans Toolbox_IT        |
++--------------------------+
+
++--------------------------+
+|   Script de création     |
+| create_shortcut.py       |
++-----------+--------------+
+| - Crée les répertoires   |
+| - Copie les fichiers     |
+| - Utilise PyInstaller    |
+| - Crée le raccourci      |
++-----------+--------------+
+            |
+            v
++-----------+--------------+
+|     Raccourci            |
++--------------------------+
+| - Lance python_intrusion_|
+|   toolbox                |
++--------------------------+
+
+
 
 ## Fonctionnalités
 
