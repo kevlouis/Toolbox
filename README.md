@@ -5,6 +5,8 @@ Projet d'études de M1 : Toolbox automatiser
 
  La Toolbox est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique versatile pour effectuer diverses tâches de sécurité telles que le scan de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
 
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/c59d28d8-0dcd-4301-a54e-f09522a43daf)
+
 ## Fonctionnalités
 
 ### Explorer les ports et les services :
