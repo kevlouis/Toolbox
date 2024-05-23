@@ -6,13 +6,40 @@ Projet d'études de M1 : Toolbox automatiser
 
 ## Fonctionnalités
 
-- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
-- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
-- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
-- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
-- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
-- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+### Explorer les ports et les services :
 
+Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
+Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
+
+### Détecter les vulnérabilités :
+
+Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
+Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
+
+### Analyser la sécurité des mots de passe :
+
+Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
+Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
+
+### Exécuter des tests d'authentification :
+
+Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
+Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
+
+### Exploiter les vulnérabilités :
+
+Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
+Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
+
+### Analyse post-exploitation :
+
+Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
+
+### Générer un rapport complet :
+
+Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
+Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
   
 
 ## Prérequis
@@ -72,6 +99,9 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 
 ### Scripts
+
+create_shortcut.py : C'est le script permettant la création d'un raccourci avec une icone permettant de n'avoir juste qu'à double cliquer pour exécuter le script python au lieu d'ouvrir une invite de commande.
+python_intrusion_toolbox.py : C'est le script principal contenant toutes les commandes pour créer la toolbox avec une interface graphique fournir des rapports et éxécuter chaque option.
 
 #### `create_shortcut.py`
 
