@@ -13,6 +13,8 @@ Projet d'études de M1 : Toolbox automatiser
 - **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
 - **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
 
+  
+
 ## Prérequis
 
 Assurez-vous d'avoir les dépendances suivantes installées :
@@ -68,90 +70,8 @@ Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou o
 
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-Publier sur GitHub
-Créez un dépôt sur GitHub : Allez sur GitHub et créez un nouveau dépôt.
-
-Ajoutez votre projet à GitHub : Utilisez les commandes suivantes pour ajouter votre projet au dépôt GitHub.
-
-sh
-Copier le code
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
-git push -u origin main
-README.md
-Assurez-vous d'ajouter le README.md au projet et de le pousser sur GitHub avec les fichiers de votre projet.
-
-markdown
-Copier le code
-# Toolbox IT
-
-Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
-
-## Fonctionnalités
-
-- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
-- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
-- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
-- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
-- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
-- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
-
-## Prérequis
-
-Assurez-vous d'avoir les dépendances suivantes installées :
-
-- Python 3
-- tkinter
-- nmap
-- paramiko
-- pexpect
-- reportlab
-- matplotlib
-- pyinstaller (pour créer un exécutable)
-
-Installez les dépendances en utilisant pip :
-
-pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
-Installation
-Clonez le dépôt GitHub :
-
-Copier le code
-git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
-cd Toolbox_IT
-Exécutez le script pour créer un raccourci sur votre bureau :
-
-Copier le code
-sudo python3 create_shortcut.py
-Utilisation
-Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
-
-Détails des Scripts
-create_shortcut.py
-Ce script crée un répertoire Toolbox_IT dans le répertoire personnel de l'utilisateur, copie les fichiers nécessaires, et crée un raccourci sur le bureau avec une icône générique. Voici les principales étapes du script :
-
-create_directories : Crée les répertoires nécessaires et copie les fichiers.
-create_linux_shortcut : Crée un raccourci sur le bureau avec une icône générique.
-main : Gère le processus d'installation et de création du raccourci.
-python_intrusion_toolbox.py
-Ce script constitue le cœur de la toolbox, fournissant l'interface graphique et les fonctionnalités de test d'intrusion. Voici quelques-unes des principales fonctions :
-
-explore_ports_and_services : Scanne les ports ouverts et identifie les services.
-detect_vulnerabilities : Utilise nmap pour détecter les vulnérabilités des services.
-analyze_passwords : Évalue la force des mots de passe.
-run_authentication_tests : Vérifie les informations d'identification SSH.
-exploit_vulnerabilities : Tente d'exploiter les vulnérabilités avec Metasploit.
-post_exploitation_analysis : Effectue des actions post-exploitation comme la recherche de fichiers sensibles et la désactivation des antivirus.
-Contributions
-Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
-
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
 ## Scripts
-#### `create_shortcut.py`
+### `create_shortcut.py`
 
 ```python
 import os
@@ -217,7 +137,7 @@ if __name__ == "__main__":
     main()
 
 
-#### `python_intrusion_toolbox.py`
+### `python_intrusion_toolbox.py`
 
 import tkinter as tk
 from tkinter import messagebox, simpledialog
@@ -611,4 +531,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
