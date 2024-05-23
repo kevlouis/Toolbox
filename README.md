@@ -68,6 +68,213 @@ Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou o
 
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
+Publier sur GitHub
+Créez un dépôt sur GitHub : Allez sur GitHub et créez un nouveau dépôt.
+
+Ajoutez votre projet à GitHub : Utilisez les commandes suivantes pour ajouter votre projet au dépôt GitHub.
+
+sh
+Copier le code
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
+git push -u origin main
+README.md
+Assurez-vous d'ajouter le README.md au projet et de le pousser sur GitHub avec les fichiers de votre projet.
+
+markdown
+Copier le code
+# Toolbox IT
+
+Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
+
+## Fonctionnalités
+
+- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
+- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
+- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
+- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
+- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
+- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+
+## Prérequis
+
+Assurez-vous d'avoir les dépendances suivantes installées :
+
+- Python 3
+- tkinter
+- nmap
+- paramiko
+- pexpect
+- reportlab
+- matplotlib
+- pyinstaller (pour créer un exécutable)
+
+Installez les dépendances en utilisant pip :
+
+pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
+Installation
+Clonez le dépôt GitHub :
+
+Copier le code
+git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
+cd Toolbox_IT
+Exécutez le script pour créer un raccourci sur votre bureau :
+
+Copier le code
+sudo python3 create_shortcut.py
+Utilisation
+Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
+
+Détails des Scripts
+create_shortcut.py
+Ce script crée un répertoire Toolbox_IT dans le répertoire personnel de l'utilisateur, copie les fichiers nécessaires, et crée un raccourci sur le bureau avec une icône générique. Voici les principales étapes du script :
+
+create_directories : Crée les répertoires nécessaires et copie les fichiers.
+create_linux_shortcut : Crée un raccourci sur le bureau avec une icône générique.
+main : Gère le processus d'installation et de création du raccourci.
+python_intrusion_toolbox.py
+Ce script constitue le cœur de la toolbox, fournissant l'interface graphique et les fonctionnalités de test d'intrusion. Voici quelques-unes des principales fonctions :
+
+explore_ports_and_services : Scanne les ports ouverts et identifie les services.
+detect_vulnerabilities : Utilise nmap pour détecter les vulnérabilités des services.
+analyze_passwords : Évalue la force des mots de passe.
+run_authentication_tests : Vérifie les informations d'identification SSH.
+exploit_vulnerabilities : Tente d'exploiter les vulnérabilités avec Metasploit.
+post_exploitation_analysis : Effectue des actions post-exploitation comme la recherche de fichiers sensibles et la désactivation des antivirus.
+Contributions
+Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
+
+Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Copier le code
+
+continue
+ChatGPT
+README.md (suite)
+Exécution et Démonstration
+Démarrage de l'application
+Une fois toutes les étapes d'installation et de configuration terminées, vous pouvez lancer l'application en double-cliquant sur l'icône "Toolbox IT" sur votre bureau. L'interface graphique de la toolbox s'ouvrira et vous pourrez sélectionner les différentes fonctionnalités disponibles pour tester la sécurité de votre système.
+
+Fonctionnalités détaillées
+Explorer les ports et les services :
+
+Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
+Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
+Détecter les vulnérabilités :
+
+Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
+Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
+Analyser la sécurité des mots de passe :
+
+Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
+Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
+Exécuter des tests d'authentification :
+
+Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
+Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
+Exploiter les vulnérabilités :
+
+Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
+Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
+Analyse post-exploitation :
+
+Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
+Générer un rapport complet :
+
+Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
+Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
+Notes et Conseils
+Sécurité : Assurez-vous de disposer des autorisations appropriées pour effectuer des tests d'intrusion sur les cibles spécifiées. L'utilisation non autorisée de ces outils peut être illégale.
+Configuration : Pour une meilleure expérience, assurez-vous que les dépendances sont correctement installées et que les configurations réseau sont appropriées.
+Personnalisation : Vous pouvez personnaliser davantage l'application en modifiant les scripts selon vos besoins spécifiques.
+Conclusion
+Toolbox IT est conçu pour être un outil polyvalent et convivial pour les professionnels de la sécurité informatique. En fournissant une gamme complète de fonctionnalités pour tester et analyser la sécurité des systèmes, il permet aux utilisateurs de mieux comprendre les vulnérabilités et de prendre des mesures pour sécuriser leurs infrastructures.
+
+Nous espérons que vous trouverez cet outil utile et nous vous invitons à contribuer à son développement continu.
+
+N'oubliez pas de remplacer votre_nom_d_utilisateur par votre nom d'utilisateur GitHub réel dans les commandes de clonage et de soumission des modifications.
+
+Pour toute question ou assistance supplémentaire, n'hésitez pas à ouvrir une issue sur GitHub ou à contacter l'équipe de développement.
+
+Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+Ce fichier README.md est structuré pour fournir une compréhension claire et complète de votre projet Toolbox IT, y compris les fonctionnalités, l'installation, l'utilisation, et les détails techniques. Il sert également de guide pour les contributeurs potentiels.
+
+comment faire des nouveaux  grands titres dans le read me
+ChatGPT
+Pour ajouter de nouveaux grands titres dans un fichier README.md en utilisant la syntaxe Markdown, vous pouvez utiliser les hashtags (#). Plus vous utilisez de hashtags, plus le niveau de titre est bas. Voici un exemple :
+
+# pour un titre de niveau 1
+## pour un titre de niveau 2
+### pour un titre de niveau 3
+Voici un exemple de comment structurer un README.md avec différents niveaux de titres :
+
+markdown
+Copier le code
+# Nom du Projet
+
+## Description
+
+Une brève description de votre projet.
+
+## Prérequis
+
+Les prérequis pour utiliser le projet :
+
+- Prérequis 1
+- Prérequis 2
+
+## Installation
+
+Les étapes pour installer le projet :
+
+```sh
+# Clonez le dépôt
+git clone https://github.com/votre_nom_d_utilisateur/nom_du_projet.git
+
+# Déplacez-vous dans le répertoire du projet
+cd nom_du_projet
+
+# Installez les dépendances
+pip install -r requirements.txt
+Utilisation
+Comment utiliser le projet :
+
+Étape 1
+Étape 2
+Étape 3
+Fonctionnalités
+Les fonctionnalités principales du projet :
+
+Fonctionnalité 1
+Fonctionnalité 2
+Fonctionnalité 3
+Contribuer
+Comment contribuer au projet :
+
+Fork le projet
+Créez une branche pour votre fonctionnalité (git checkout -b feature/AmazingFeature)
+Committez vos modifications (git commit -m 'Add some AmazingFeature')
+Poussez à la branche (git push origin feature/AmazingFeature)
+Ouvrez une Pull Request
+Licence
+Distribué sous la licence MIT. Voir LICENSE pour plus d'information
+
+## Fonctionnalités
+
+- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
+- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
+- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
+- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
+- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
+- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
+
 ## Scripts
 #### `create_shortcut.py`
 
@@ -529,317 +736,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-Publier sur GitHub
-Créez un dépôt sur GitHub : Allez sur GitHub et créez un nouveau dépôt.
-
-Ajoutez votre projet à GitHub : Utilisez les commandes suivantes pour ajouter votre projet au dépôt GitHub.
-
-sh
-Copier le code
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
-git push -u origin main
-README.md
-Assurez-vous d'ajouter le README.md au projet et de le pousser sur GitHub avec les fichiers de votre projet.
-
-markdown
-Copier le code
-# Toolbox IT
-
-Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
-
-## Fonctionnalités
-
-- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
-- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
-- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
-- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
-- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
-- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
-
-## Prérequis
-
-Assurez-vous d'avoir les dépendances suivantes installées :
-
-- Python 3
-- tkinter
-- nmap
-- paramiko
-- pexpect
-- reportlab
-- matplotlib
-- pyinstaller (pour créer un exécutable)
-
-Installez les dépendances en utilisant pip :
-
-```sh
-pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
-Installation
-Clonez le dépôt GitHub :
-
-sh
-Copier le code
-git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
-cd Toolbox_IT
-Exécutez le script pour créer un raccourci sur votre bureau :
-
-sh
-Copier le code
-sudo python3 create_shortcut.py
-Utilisation
-Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
-
-Détails des Scripts
-create_shortcut.py
-Ce script crée un répertoire Toolbox_IT dans le répertoire personnel de l'utilisateur, copie les fichiers nécessaires, et crée un raccourci sur le bureau avec une icône générique. Voici les principales étapes du script :
-
-create_directories : Crée les répertoires nécessaires et copie les fichiers.
-create_linux_shortcut : Crée un raccourci sur le bureau avec une icône générique.
-main : Gère le processus d'installation et de création du raccourci.
-python_intrusion_toolbox.py
-Ce script constitue le cœur de la toolbox, fournissant l'interface graphique et les fonctionnalités de test d'intrusion. Voici quelques-unes des principales fonctions :
-
-explore_ports_and_services : Scanne les ports ouverts et identifie les services.
-detect_vulnerabilities : Utilise nmap pour détecter les vulnérabilités des services.
-analyze_passwords : Évalue la force des mots de passe.
-run_authentication_tests : Vérifie les informations d'identification SSH.
-exploit_vulnerabilities : Tente d'exploiter les vulnérabilités avec Metasploit.
-post_exploitation_analysis : Effectue des actions post-exploitation comme la recherche de fichiers sensibles et la désactivation des antivirus.
-Contributions
-Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
-
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-Copier le code
-
-continue
-ChatGPT
-README.md (suite)
-Exécution et Démonstration
-Démarrage de l'application
-Une fois toutes les étapes d'installation et de configuration terminées, vous pouvez lancer l'application en double-cliquant sur l'icône "Toolbox IT" sur votre bureau. L'interface graphique de la toolbox s'ouvrira et vous pourrez sélectionner les différentes fonctionnalités disponibles pour tester la sécurité de votre système.
-
-Fonctionnalités détaillées
-Explorer les ports et les services :
-
-Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
-Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
-Détecter les vulnérabilités :
-
-Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
-Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
-Analyser la sécurité des mots de passe :
-
-Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
-Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
-Exécuter des tests d'authentification :
-
-Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
-Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
-Exploiter les vulnérabilités :
-
-Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
-Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
-Analyse post-exploitation :
-
-Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
-Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
-Générer un rapport complet :
-
-Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
-Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
-Notes et Conseils
-Sécurité : Assurez-vous de disposer des autorisations appropriées pour effectuer des tests d'intrusion sur les cibles spécifiées. L'utilisation non autorisée de ces outils peut être illégale.
-Configuration : Pour une meilleure expérience, assurez-vous que les dépendances sont correctement installées et que les configurations réseau sont appropriées.
-Personnalisation : Vous pouvez personnaliser davantage l'application en modifiant les scripts selon vos besoins spécifiques.
-Conclusion
-Toolbox IT est conçu pour être un outil polyvalent et convivial pour les professionnels de la sécurité informatique. En fournissant une gamme complète de fonctionnalités pour tester et analyser la sécurité des systèmes, il permet aux utilisateurs de mieux comprendre les vulnérabilités et de prendre des mesures pour sécuriser leurs infrastructures.
-
-Nous espérons que vous trouverez cet outil utile et nous vous invitons à contribuer à son développement continu.
-
-N'oubliez pas de remplacer votre_nom_d_utilisateur par votre nom d'utilisateur GitHub réel dans les commandes de clonage et de soumission des modifications.
-
-Pour toute question ou assistance supplémentaire, n'hésitez pas à ouvrir une issue sur GitHub ou à contacter l'équipe de développement.
-
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-Ce fichier README.md est structuré pour fournir une compréhension claire et complète de votre projet Toolbox IT, y compris les fonctionnalités, l'installation, l'utilisation, et les détails techniques. Il sert également de guide pour les contributeurs potentiels.
-
-comment faire des nouveaux  grands titres dans le read me
-ChatGPT
-Pour ajouter de nouveaux grands titres dans un fichier README.md en utilisant la syntaxe Markdown, vous pouvez utiliser les hashtags (#). Plus vous utilisez de hashtags, plus le niveau de titre est bas. Voici un exemple :
-
-# pour un titre de niveau 1
-## pour un titre de niveau 2
-### pour un titre de niveau 3
-Voici un exemple de comment structurer un README.md avec différents niveaux de titres :
-
-markdown
-Copier le code
-# Nom du Projet
-
-## Description
-
-Une brève description de votre projet.
-
-## Prérequis
-
-Les prérequis pour utiliser le projet :
-
-- Prérequis 1
-- Prérequis 2
-
-## Installation
-
-Les étapes pour installer le projet :
-
-```sh
-# Clonez le dépôt
-git clone https://github.com/votre_nom_d_utilisateur/nom_du_projet.git
-
-# Déplacez-vous dans le répertoire du projet
-cd nom_du_projet
-
-# Installez les dépendances
-pip install -r requirements.txt
-Utilisation
-Comment utiliser le projet :
-
-Étape 1
-Étape 2
-Étape 3
-Fonctionnalités
-Les fonctionnalités principales du projet :
-
-Fonctionnalité 1
-Fonctionnalité 2
-Fonctionnalité 3
-Contribuer
-Comment contribuer au projet :
-
-Fork le projet
-Créez une branche pour votre fonctionnalité (git checkout -b feature/AmazingFeature)
-Committez vos modifications (git commit -m 'Add some AmazingFeature')
-Poussez à la branche (git push origin feature/AmazingFeature)
-Ouvrez une Pull Request
-Licence
-Distribué sous la licence MIT. Voir LICENSE pour plus d'informations.
-
-diff
-Copier le code
-
-En utilisant cette structure, vous pouvez créer un fichier `README.md` bien organisé et facile à naviguer.
-
-Voici la version complète du `README.md` pour votre projet Toolbox IT avec les nouveaux titres ajoutés :
-
-### README.md complet
-
-```markdown
-# Toolbox IT
-
-Toolbox IT est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique conviviale pour effectuer diverses tâches de sécurité telles que l'exploration de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
-
-## Fonctionnalités
-
-- **Explorer les ports et les services** : Scanne les ports ouverts et identifie les services associés.
-- **Détecter les vulnérabilités** : Analyse les services pour détecter des vulnérabilités connues.
-- **Analyser la sécurité des mots de passe** : Évalue la robustesse des mots de passe.
-- **Exécuter des tests d'authentification** : Vérifie les informations d'identification pour les connexions SSH.
-- **Exploiter les vulnérabilités** : Tente d'exploiter les vulnérabilités identifiées pour accéder au système cible.
-- **Analyse post-exploitation** : Effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
-
-## Prérequis
-
-Assurez-vous d'avoir les dépendances suivantes installées :
-
-- Python 3
-- tkinter
-- nmap
-- paramiko
-- pexpect
-- reportlab
-- matplotlib
-- pyinstaller (pour créer un exécutable)
-
-Installez les dépendances en utilisant pip :
-
-```sh
-pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
-Installation
-Cloner le dépôt
-Clonez le dépôt GitHub :
-
-sh
-Copier le code
-git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
-cd Toolbox_IT
-Créer le raccourci
-Exécutez le script pour créer un raccourci sur votre bureau :
-
-sh
-Copier le code
-sudo python3 create_shortcut.py
-Utilisation
-Démarrage de l'application
-Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
-
-Fonctionnalités détaillées
-Explorer les ports et les services :
-
-Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
-Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
-Détecter les vulnérabilités :
-
-Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
-Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
-Analyser la sécurité des mots de passe :
-
-Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
-Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
-Exécuter des tests d'authentification :
-
-Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
-Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
-Exploiter les vulnérabilités :
-
-Description : Cette fonctionnalité tente d'exploiter les vulnérabilités identifiées pour obtenir un accès non autorisé au système cible.
-Utilisation : Sélectionnez l'option "Exploiter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les tentatives d'exploitation et leurs résultats.
-Analyse post-exploitation :
-
-Description : Cette fonctionnalité effectue une analyse approfondie après l'exploitation pour identifier les données sensibles et les mesures de sécurité en place.
-Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les informations requises. Le rapport généré documentera les actions de post-exploitation effectuées.
-Générer un rapport complet :
-
-Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
-Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
-Notes et Conseils
-Sécurité : Assurez-vous de disposer des autorisations appropriées pour effectuer des tests d'intrusion sur les cibles spécifiées. L'utilisation non autorisée de ces outils peut être illégale.
-Configuration : Pour une meilleure expérience, assurez-vous que les dépendances sont correctement installées et que les configurations réseau sont appropriées.
-Personnalisation : Vous pouvez personnaliser davantage l'application en modifiant les scripts selon vos besoins spécifiques.
-Conclusion
-Toolbox IT est conçu pour être un outil polyvalent et convivial pour les professionnels de la sécurité informatique. En fournissant une gamme complète de fonctionnalités pour tester et analyser la sécurité des systèmes, il permet aux utilisateurs de mieux comprendre les vulnérabilités et de prendre des mesures pour sécuriser leurs infrastructures.
-
-Nous espérons que vous trouverez cet outil utile et nous vous invitons à contribuer à son développement continu.
-
-Contributions
-Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
-
-Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
-
-go
-Copier le code
-
-Ce fichier `README.md` est maintenant structuré avec des titres clairs et hiérarchisés, ce qui le rend facile à lire et à naviguer. Vous pouvez ajouter, modifier ou supprimer des sections selon vos besoins spécifiques.
-
-
-
-
-
 
