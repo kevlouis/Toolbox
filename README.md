@@ -17,20 +17,36 @@ Projet d'études de M1 : Toolbox automatiser
 Description : Cette fonctionnalité scanne les ports ouverts de la cible spécifiée et identifie les services associés à ces ports.
 Utilisation : Sélectionnez l'option "Explorer les ports et les services" et entrez l'adresse IP de la cible. Le rapport généré listera les ports ouverts et les services associés.
 
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/5bb06994-79a7-40bf-b002-5ae7b6fc0d92)
+
+
 ### Détecter les vulnérabilités :
 
 Description : Cette fonctionnalité analyse les services en cours d'exécution sur la cible pour détecter des vulnérabilités connues.
 Utilisation : Sélectionnez l'option "Détecter les vulnérabilités" et entrez l'adresse IP de la cible. Le rapport généré détaillera les vulnérabilités détectées, y compris les versions des services et des suggestions sur la manière dont elles peuvent être exploitées.
+
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/491faa54-6db8-4fdc-beae-18b369e69567)
+
 
 ### Analyser la sécurité des mots de passe :
 
 Description : Cette fonctionnalité évalue la robustesse des mots de passe fournis en analysant leur longueur et leur complexité.
 Utilisation : Sélectionnez l'option "Analyser la sécurité des mots de passe" et entrez le mot de passe à analyser. Le rapport généré évaluera la force du mot de passe.
 
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/4bc25ebb-5b41-46bd-a4b1-62af9ec7ab49)
+
+
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/3fdc8aaf-cb75-4a78-881c-d2c880b8f2b2)
+
+
 ### Exécuter des tests d'authentification :
 
 Description : Cette fonctionnalité vérifie les informations d'identification pour les connexions SSH.
 Utilisation : Sélectionnez l'option "Exécuter des tests d'authentification" et entrez l'adresse IP de la cible, le nom d'utilisateur et le mot de passe. Le rapport généré indiquera si l'authentification a réussi.
+
+
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/b42da4e3-c9e1-46e1-99b5-1ad451eb2e6a)
+
 
 ### Exploiter les vulnérabilités :
 
@@ -46,7 +62,6 @@ Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les i
 
 Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
 Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
-  
 
 ## Prérequis
 
@@ -72,6 +87,10 @@ cd Toolbox_IT
 ## Exécutez le script pour créer un raccourci sur votre bureau :
 
 sudo python3 create_shortcut.py
+
+
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/e3e2f1ea-aab2-4893-a1d6-f647a17cbcfa)
+
 
 ## Utilisation 
 
