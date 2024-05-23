@@ -32,7 +32,7 @@ Installez les dépendances en utilisant pip :
 pip install python-nmap paramiko pexpect reportlab matplotlib pyinstaller
 
 
-Installation
+## Installation
 Clonez le dépôt GitHub :
 Copier le code
 git clone https://github.com/votre_nom_d_utilisateur/Toolbox_IT.git
