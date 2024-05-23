@@ -63,6 +63,10 @@ Utilisation : Sélectionnez l'option "Analyse post-exploitation" et entrez les i
 Description : Cette fonctionnalité génère un rapport complet incluant toutes les analyses sélectionnées.
 Utilisation : Sélectionnez l'option "Générer un rapport complet". Le rapport généré comprendra toutes les analyses effectuées.
 
+
+![image](https://github.com/kevlouis/Toolbox/assets/114162535/c6daf734-36be-46a9-beb2-e08940a5350c)
+
+
 ## Prérequis
 
 Assurez-vous d'avoir les dépendances suivantes installées :
