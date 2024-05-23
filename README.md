@@ -72,7 +72,7 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 ## Scripts
 ### create_shortcut.py
-python
+
 import os
 import platform
 import subprocess
@@ -134,10 +134,9 @@ def main():
     
 if __name__ == "__main__":
     main()
-    
+
+
 ### python_intrusion_toolbox.py
-python
-Copier le code
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 import socket
@@ -588,7 +587,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
+
 ### Contributions
 Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
 
