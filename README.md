@@ -70,8 +70,7 @@ Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou o
 
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
-## Scripts
-### create_shortcut.py
+## create_shortcut.py
 
 import os
 import platform
