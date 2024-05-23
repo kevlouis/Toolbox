@@ -69,7 +69,15 @@ sudo python3 create_shortcut.py
 
 ## Utilisation 
 
-Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
+Exécuter le script pour créer le raccourci
+
+Le script create_shortcut.py s'occupe de tout pour vous. Il va :
+
+Créer un dossier Toolbox_IT dans votre répertoire personnel.
+Copier les fichiers nécessaires dans ce dossier.
+Utiliser PyInstaller pour créer un exécutable de l'outil principal python_intrusion_toolbox.py.
+Créer un raccourci sur votre bureau pour lancer l'outil avec une icône générique.
+Pour exécuter le script, utilisez la commande suivante :
 
 ## Détails des Scripts
 
