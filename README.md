@@ -71,9 +71,9 @@ Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou o
 Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 ## Scripts
-### `create_shortcut.py`
-
-```python
+### create_shortcut.py
+python
+Copier le code
 import os
 import platform
 import subprocess
@@ -135,10 +135,10 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
-### `python_intrusion_toolbox.py`
-
+    
+### python_intrusion_toolbox.py
+python
+Copier le code
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 import socket
@@ -408,7 +408,6 @@ class BoiteOutilsGUI:
         styles.add(ParagraphStyle(name='Justify', alignment=4))
         report_content = []
 
-        # Couverture du rapport
         report_content.append(Paragraph("Rapport de Sécurité", styles["Title"]))
         report_content.append(Paragraph(f"Date et heure du test : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", styles["Normal"]))
         report_content.append(Spacer(1, 12))
@@ -524,10 +523,79 @@ class BoiteOutilsGUI:
         plt.close()
         report_content.append(ReportLabImage(graph_filename))
 
+def create_windows_shortcut(target, shortcut_name, icon_path):
+    from win32com.client import Dispatch
+    shell = Dispatch('WScript.Shell')
+    shortcut = shell.CreateShortCut(os.path.join(os.path.expanduser('~'), 'Desktop', f"{shortcut_name}.lnk"))
+    shortcut.TargetPath = target
+    shortcut.IconLocation = icon_path
+    shortcut.save()
+
+def create_linux_shortcut(target, shortcut_name, icon_path):
+    desktop_entry = f"""
+[Desktop Entry]
+Version=1.0
+Name={shortcut_name}
+Exec={target}
+Icon={icon_path}
+Terminal=false
+Type=Application
+"""
+    desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+    shortcut_path = os.path.join(desktop_path, f"{shortcut_name}.desktop")
+    with open(shortcut_path, 'w') as shortcut_file:
+        shortcut_file.write(desktop_entry)
+    os.chmod(shortcut_path, 0o755)
+
+def add_to_registry():
+    import winreg
+    try:
+        app_path = os.path.abspath(sys.argv[0])
+        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, winreg.KEY_SET_VALUE) as key:
+            winreg.SetValueEx(key, "Toolbox IT", 0, winreg.REG_SZ, app_path)
+        return True
+    except Exception as e:
+        print("Error adding to registry:", e)
+        return False
+
 def main():
+    if not getattr(sys, 'frozen', False):
+        script_path = os.path.abspath(sys.argv[0])
+        subprocess.call(['pyinstaller', '--onefile', '--windowed', script_path])
+        exe_path = os.path.join('dist', os.path.splitext(os.path.basename(script_path))[0])
+        if platform.system() == 'Linux':
+            exe_path = os.path.join('dist', os.path.splitext(os.path.basename(script_path))[0] + '.run')
+    else:
+        exe_path = sys.executable
+
+    if platform.system() == 'Windows':
+        target = exe_path
+        shortcut_name = "Toolbox IT"
+        icon_path = os.path.abspath("toolbox_icon.ico")
+        create_windows_shortcut(target, shortcut_name, icon_path)
+        if add_to_registry():
+            print("La Toolbox a été ajoutée au démarrage automatique.")
+        else:
+            print("Erreur lors de l'ajout de la Toolbox au démarrage automatique.")
+    elif platform.system() == 'Linux':
+        target = exe_path
+        shortcut_name = "Toolbox IT"
+        icon_path = "utilities-terminal"  # Icône générique
+        create_linux_shortcut(target, shortcut_name, icon_path)
+
     root = tk.Tk()
     app = BoiteOutilsGUI(root)
     root.mainloop()
 
 if __name__ == "__main__":
     main()
+    
+### Contributions
+Les contributions sont les bienvenues. Veuillez soumettre des pull requests ou ouvrir des issues pour discuter des modifications proposées.
+
+### Licence
+Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+N'oubliez pas de remplacer votre_nom_d_utilisateur par votre nom d'utilisateur GitHub réel dans les commandes de clonage et de soumission des modifications.
+
+Pour toute question ou assistance supplémentaire, n'hésitez pas à ouvrir une issue sur GitHub ou à contacter l'équipe de développement.
