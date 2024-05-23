@@ -1,5 +1,6 @@
 # Toolbox
 Projet d'études de M1 : Toolbox automatiser 
+
 # Toolbox 
 
  La Toolbox est un outil de test d'intrusion simple et intuitif conçu pour évaluer la sécurité des systèmes d'information. Il offre une interface graphique versatile pour effectuer diverses tâches de sécurité telles que le scan de ports, la détection de vulnérabilités, l'analyse de la sécurité des mots de passe, et bien plus encore.
@@ -71,13 +72,22 @@ sudo python3 create_shortcut.py
 
 Exécuter le script pour créer le raccourci
 
-Le script create_shortcut.py s'occupe de tout pour vous. Il va :
+Le script create_shortcut.py s'occupe de créer les répertoires nécessaires, de copier les fichiers, de générer un exécutable et de créer un raccourci sur le bureau. Pour exécuter le script :
 
-Créer un dossier Toolbox_IT dans votre répertoire personnel.
-Copier les fichiers nécessaires dans ce dossier.
-Utiliser PyInstaller pour créer un exécutable de l'outil principal python_intrusion_toolbox.py.
-Créer un raccourci sur votre bureau pour lancer l'outil avec une icône générique.
-Pour exécuter le script, utilisez la commande suivante :
+sudo python3 create_shortcut.py
+Ce que fait le script :
+Crée un dossier Toolbox_IT dans votre répertoire personnel.
+Copie le fichier python_intrusion_toolbox.py dans ce dossier.
+Utilise PyInstaller pour créer un exécutable.
+Crée un raccourci sur votre bureau pour lancer l'outil avec une icône générique.
+Lancer l'application
+
+Une fois le raccourci créé, double-cliquez sur l'icône "Toolbox IT" sur votre bureau pour lancer l'interface graphique. Vous pouvez ensuite sélectionner les fonctionnalités que vous souhaitez utiliser et suivre les instructions à l'écran.
+
+Fichiers créés
+Dossier Toolbox_IT : Créé dans votre répertoire personnel pour stocker les fichiers nécessaires.
+Raccourci Toolbox_IT.desktop : Créé sur votre bureau pour lancer l'application.
+Ces fichiers sont créés automatiquement par le script create_shortcut.py, vous n'avez donc pas besoin de les créer manuellement.
 
 ## Détails des Scripts
 
